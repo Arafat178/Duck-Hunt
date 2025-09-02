@@ -43,7 +43,7 @@ async def main():
     flyD_count = 0
     duck_die = False
     duckY_up = False
-    duck_speed = 6
+    duck_speed = 5
     duckY_down = True
     randYup =0
     randYdown = 0
@@ -151,24 +151,26 @@ async def main():
         screen.blit(bullet,(x,y))
 
     # ---------------- UI Buttons ----------------
-    button_fire = pygame.Rect(60, 500, 80, 80)
+    button_fire = pygame.Rect(60, 480, 120, 100)
     button_start= pygame.Rect(650, 500, 200, 80)
-    mouse_pad = pygame.Rect(500, 480, 400, 120)  # x,y,w,h
+    mouse_pad = pygame.Rect(500, 430, 400, 170)  # x,y,w,h
+    mouse_pad1 = pygame.Rect(500, 480, 400, 120)  # x,y,w,h
     font_btn = pygame.font.SysFont('freesansbold.ttf', 25)
     font_start= pygame.font.SysFont('freesansbold.ttf', 32)
 
     def draw_buttons():
-        pygame.draw.rect(screen, (255, 0, 0), button_fire)
-        screen.blit(font_btn.render('FIRE', True, (255, 255, 255)), (75, 530))
+        pygame.draw.rect(screen, (255, 0, 0), button_fire, border_radius= 30)
+        text = font_btn.render("Shoot", True, (0, 0, 0))
+        screen.blit(text, (button_fire.x + 30, button_fire.y + 40))
 
     def draw_start_button():
         pygame.draw.rect(screen, (250, 100, 10), button_start, border_radius=15)
         text = font_start.render("START", True, (0, 0, 0))
         screen.blit(text, (button_start.x + 50, button_start.y + 30))
     def mouse_pad_xy():
-        pygame.draw.rect(screen, (100, 100, 100), mouse_pad, border_radius=10)  # grey pad
+        pygame.draw.rect(screen, (100, 100, 100), mouse_pad1, border_radius=10)  # grey pad
         text = font_start.render("Drag to shoot", True, (0, 0, 0))
-        screen.blit(text, (button_start.x + 10, button_start.y + 30))
+        screen.blit(text, (mouse_pad1.x + 100, mouse_pad1.y + 40))
 
     game_start = False
     game_cover = pygame.image.load('assets/images/cover.png')
