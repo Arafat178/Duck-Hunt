@@ -174,6 +174,7 @@ async def main():
 
     game_start = False
     game_cover = pygame.image.load('assets/images/cover.png')
+    gun_sound = mixer.Sound('assets/sounds/gunSht.ogg')
     def game_start_cover(x,y):
         screen.blit(game_cover,(x,y))
 
@@ -186,18 +187,16 @@ async def main():
             if event.type == pygame.QUIT:
                 running = False
             if event.type == pygame.MOUSEBUTTONDOWN: #game control by mouse
+                if button_fire.collidepoint(event.pos) and duck_die == False and gameOver == False and bullet_count<=2 and game_start == True:
+                    gun_sound.play()
+                    aim_shoot = True
+                    bullet_count += 1  # number of bullet using
                 if event.button == 3 and duck_die == False and gameOver == False and bullet_count<=2 and game_start == True :
-                    gun_sound = mixer.Sound('assets/sounds/gunSht.ogg')
                     gun_sound.play()
                     aim_shoot = True
                     bullet_count += 1  # number of bullet using
                 if button_start.collidepoint(event.pos):
                     game_start = True
-                if button_fire.collidepoint(event.pos) and duck_die == False and gameOver == False and bullet_count<=2 and game_start == True:
-                    gun_sound = mixer.Sound('assets/sounds/gunSht.ogg')
-                    gun_sound.play()
-                    aim_shoot = True
-                    bullet_count += 1  # number of bullet using
             if event.type == pygame.MOUSEBUTTONUP :
                 aim_shoot = False
             if event.type == pygame.MOUSEMOTION and game_start: # for touch pad to move aim
